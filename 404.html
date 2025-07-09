@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ối! Lạc Đường Rồi! - 404</title>
+    <!-- Tải Tailwind CSS để trang web đẹp lung linh, không cần viết CSS nhiều -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Sử dụng font Inter cho toàn bộ trang để nhìn hiện đại và dễ đọc */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Nền tối cho thêm phần bí ẩn */
+            color: #e2e8f0; /* Chữ sáng nổi bật trên nền tối */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Đảm bảo trang chiếm toàn bộ chiều cao màn hình */
+            margin: 0;
+            overflow: hidden; /* Tránh thanh cuộn không mong muốn */
+        }
+        /* Hiệu ứng chuyển động nhẹ nhàng cho các phần tử */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Hiệu ứng cho nút bấm */
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+    <div class="text-center bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl max-w-lg w-full transform transition-all duration-500 hover:scale-105 animate-fade-in">
+        <!-- Tiêu đề lỗi 404 to đùng, nổi bật -->
+        <h1 class="text-7xl md:text-9xl font-extrabold text-red-500 mb-4 drop-shadow-lg">404</h1>
+        <!-- Thông báo lỗi thân thiện -->
+        <p class="text-2xl md:text-3xl font-semibold text-gray-200 mb-6">
+            Ối! Hình như bạn lạc đường rồi! 😅
+        </p>
+        <!-- Thông báo đếm ngược về trang chủ -->
+        <p class="text-lg md:text-xl text-gray-400 mb-8">
+            Đừng lo, tớ sẽ đưa bạn về <span class="text-blue-400 font-bold">trang chủ</span> sau <span id="countdown" class="text-blue-400 font-bold">3</span> giây nữa...
+        </p>
+        <!-- Nút quay về trang chủ ngay lập tức -->
+        <a href="/" class="btn-primary inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
+            Về Trang Chủ Ngay! 🚀
+        </a>
+    </div>
+
+    <script>
+        // Lấy thẻ hiển thị số đếm ngược
+        const countdownElement = document.getElementById('countdown');
+        // Thời gian đếm ngược ban đầu
+        let timeLeft = 3;
+
+        // Hàm cập nhật số đếm ngược và chuyển hướng
+        function updateCountdown() {
+            // Cập nhật nội dung số đếm trên trang
+            countdownElement.textContent = timeLeft;
+
+            // Giảm thời gian còn lại
+            timeLeft--;
+
+            // Nếu hết thời gian, chuyển hướng về trang chủ
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval); // Dừng bộ đếm
+                window.location.href = '/'; // Chuyển hướng về trang chủ (thay bằng URL trang chủ của bạn nếu khác)
+            }
+        }
+
+        // Gọi hàm updateCountdown mỗi 1 giây
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Gọi lần đầu tiên để hiển thị số 3 ngay lập tức
+        updateCountdown();
+    </script>
+</body>
+</html>

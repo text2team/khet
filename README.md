@@ -1,2 +1,2 @@
 # khet
-khet media
+khet job 
