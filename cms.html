@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS Đăng bài lên GitHub</title>
+  <style>
+    body { font-family: Arial; padding: 2rem; max-width: 600px; margin: auto; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 8px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h2>Đăng bài mới</h2>
+  <input type="password" id="token" placeholder="Nhập GitHub Token">
+  <input type="text" id="filename" placeholder="Tên file (vd: bai-viet-1.html)">
+  <input type="text" id="title" placeholder="Tiêu đề bài viết">
+  <textarea id="content" placeholder="Nội dung HTML bài viết"></textarea>
+
+  <label>Chọn hình ảnh:</label>
+  <input type="file" id="imageFile">
+  
+  <button onclick="uploadPost()">Đăng bài</button>
+
+  <p id="status"></p>
+
+  <script>
+    const repoOwner = 'khetcompany';
+    const repoName = 'khet'; // ← Đổi tên repo của bạn
+
+    async function uploadPost() {
+      const token = document.getElementById("token").value.trim();
+      const filename = document.getElementById("filename").value.trim();
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("content").value.trim();
+      const imageFile = document.getElementById("imageFile").files[0];
+
+      if (!filename || !title || !content || !token) {
+        return alert("Hãy điền đầy đủ thông tin!");
+      }
+
+      // 1. Upload ảnh nếu có
+      let imagePath = "";
+      if (imageFile) {
+        const imgBase64 = await toBase64(imageFile);
+        const imgPath = `media/img-post/${imageFile.name}`;
+        await uploadToGitHub(imgPath, imgBase64, token);
+        imagePath = imgPath;
+      }
+
+      // 2. Tạo nội dung HTML bài viết
+      const html = `
+<!DOCTYPE html>
+<html>
+<head><title>${title}</title></head>
+<body>
+  <h1>${title}</h1>
+  ${imagePath ? `<img src="/${imagePath}" style="max-width:100%">` : ''}
+  <div>${content}</div>
+</body>
+</html>`;
+
+      const htmlBase64 = btoa(unescape(encodeURIComponent(html)));
+      await uploadToGitHub(`post/${filename}`, htmlBase64, token);
+      document.getElementById("status").innerText = "🎉 Đăng bài thành công!";
+    }
+
+    async function uploadToGitHub(path, contentBase64, token) {
+      const res = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: `Tạo hoặc cập nhật ${path}`,
+          content: contentBase64
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(`❌ Lỗi upload ${path}: ${err.message}`);
+      }
+    }
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
+</body>
+</html>
