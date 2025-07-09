@@ -9,47 +9,50 @@
   </style>
 </head>
 <body>
-  <h2>Đăng bài từ file .zip</h2>
-  <input type="text" id="filename" placeholder="Tên file HTML sau khi upload (vd: bai-viet-1.html)">
+  <h2>📦 Đăng bài từ file .zip</h2>
+  <input type="text" id="token" placeholder="🔑 Dán GitHub Token của bạn">
+  <input type="text" id="filename" placeholder="📄 Tên file bài viết (vd: bai-viet-1.html)">
   <input type="file" id="zipFile" accept=".zip">
   <button onclick="handleUpload()">🚀 Tải lên GitHub</button>
   <p id="status"></p>
 
-  <!-- JSZip để giải nén -->
+  <!-- JSZip -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <script>
-    const GITHUB_TOKEN = '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';
     const REPO_OWNER = 'khetcompany';
     const REPO_NAME = 'khet';
 
     async function handleUpload() {
+      const token = document.getElementById('token').value.trim();
       const fileInput = document.getElementById('zipFile');
       const filename = document.getElementById('filename').value.trim();
       const status = document.getElementById('status');
-      if (!fileInput.files[0] || !filename) return alert("Vui lòng chọn file ZIP và nhập tên bài viết!");
 
-      status.innerText = "⏳ Đang xử lý...";
+      if (!token || !fileInput.files[0] || !filename) {
+        alert("⛔ Vui lòng nhập đầy đủ token, tên file và chọn file ZIP.");
+        return;
+      }
+
+      status.innerText = "⏳ Đang xử lý ZIP...";
 
       try {
         const zip = await JSZip.loadAsync(fileInput.files[0]);
         let htmlContent = "";
-        const imageUploads = [];
 
-        // Tìm file HTML đầu tiên
+        // Tìm file HTML & sửa đường dẫn ảnh
         for (const [path, file] of Object.entries(zip.files)) {
           if (path.endsWith(".html") && !file.dir) {
             htmlContent = await file.async("string");
 
-            // Tìm tất cả src ảnh và thay thế đường dẫn
+            // Sửa đường dẫn ảnh trong HTML
             htmlContent = htmlContent.replace(/<img\s+[^>]*src="([^"]+)"[^>]*>/g, (match, src) => {
-              const filename = src.split('/').pop();
-              return match.replace(src, `/media/img-post/${filename}`);
+              const clean = src.split('/').pop();
+              return match.replace(src, `/media/img-post/${clean}`);
             });
 
-            // Encode HTML to base64
             const htmlBase64 = btoa(unescape(encodeURIComponent(htmlContent)));
-            await uploadToGitHub(`post/${filename}`, htmlBase64);
+            await uploadToGitHub(`post/${filename}`, htmlBase64, token);
           }
         }
 
@@ -58,22 +61,22 @@
           if (!file.dir && /\.(jpg|jpeg|png|gif|webp)$/i.test(path)) {
             const imageData = await file.async("base64");
             const imageName = path.split('/').pop();
-            await uploadToGitHub(`media/img-post/${imageName}`, imageData);
+            await uploadToGitHub(`media/img-post/${imageName}`, imageData, token);
           }
         }
 
-        status.innerText = "🎉 Đăng bài thành công!";
+        status.innerText = "✅ Đăng bài thành công!";
       } catch (err) {
         console.error(err);
         status.innerText = "❌ Lỗi: " + err.message;
       }
     }
 
-    async function uploadToGitHub(path, contentBase64) {
+    async function uploadToGitHub(path, contentBase64, token) {
       const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
         method: "PUT",
         headers: {
-          "Authorization": `token ${GITHUB_TOKEN}`,
+          "Authorization": `token ${token}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -84,7 +87,7 @@
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(`Upload thất bại (${path}): ${error.message}`);
+        throw new Error(`❌ Upload thất bại (${path}): ${error.message}`);
       }
     }
   </script>
