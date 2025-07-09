@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
   branch: main
+  site_url: https://khet.text2.click
 
 media_folder: "media"
 public_folder: "/media"
