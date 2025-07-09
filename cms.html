@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>📝 CMS dùng TinyMCE - Đăng bài GitHub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <meta charset="UTF-8" />
+  <title>📝 CMS TinyMCE Pro - Đăng bài lên GitHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- TinyMCE từ API Key của bạn -->
+  <script src="https://cdn.tiny.cloud/1/6bg0uo9f4os8zno4f0vca4s2pbsuqyqzaif3lwufh6u3ohya/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
       padding: 2rem;
-      max-width: 800px;
+      background: #f4f4f4;
+      max-width: 900px;
       margin: auto;
     }
     input {
@@ -33,38 +36,58 @@
       font-weight: bold;
     }
   </style>
-
-  <script>
-    tinymce.init({
-      selector: '#editor',
-      height: 500,
-      plugins: 'image link lists code',
-      toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | image link | code',
-      branding: false
-    });
-  </script>
 </head>
 <body>
-  <h2>📄 Soạn bài & Đăng lên GitHub</h2>
+  <h2>📄 Soạn & Đăng bài lên GitHub</h2>
 
   <label>Tiêu đề bài viết</label>
-  <input type="text" id="title" placeholder="Nhập tiêu đề">
+  <input type="text" id="title" placeholder="Ví dụ: Tin tức mới nhất" />
 
-  <label>Tên file lưu (vd: bai-viet-1.html)</label>
-  <input type="text" id="filename" placeholder="Tên file (phải có .html)">
+  <label>Tên file lưu (ví dụ: bai-viet-1.html)</label>
+  <input type="text" id="filename" placeholder="bai-viet-1.html" />
 
-  <label>Soạn thảo nội dung</label>
-  <textarea id="editor"></textarea>
+  <label>Nội dung bài viết</label>
+  <textarea id="editor">Chào mừng bạn đến với CMS TinyMCE 😎</textarea>
 
-  <br><br>
-  <button onclick="uploadPost()">📤 Đăng bài</button>
+  <br /><br />
+  <button onclick="uploadPost()">🚀 Đăng bài</button>
 
   <p id="status"></p>
 
+  <!-- Cấu hình TinyMCE dùng API key -->
+  <script>
+    tinymce.init({
+      selector: "#editor",
+      height: 500,
+      plugins: [
+        "anchor", "autolink", "charmap", "codesample", "emoticons", "image", "link",
+        "lists", "media", "searchreplace", "table", "visualblocks", "wordcount",
+        "checklist", "mediaembed", "casechange", "formatpainter", "pageembed", "a11ychecker",
+        "tinymcespellchecker", "permanentpen", "powerpaste", "advtable", "advcode", "editimage",
+        "advtemplate", "ai", "mentions", "tinycomments", "tableofcontents", "footnotes",
+        "mergetags", "autocorrect", "typography", "inlinecss", "markdown",
+        "importword", "exportword", "exportpdf"
+      ],
+      toolbar:
+        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+      tinycomments_mode: "embedded",
+      tinycomments_author: "Khet CMS",
+      mergetags_list: [
+        { value: "First.Name", title: "First Name" },
+        { value: "Email", title: "Email" }
+      ],
+      ai_request: (request, respondWith) =>
+        respondWith.string(() =>
+          Promise.reject("Tạm thời chưa dùng AI Editor Assistant 😅")
+        )
+    });
+  </script>
+
+  <!-- Script upload lên GitHub -->
   <script>
     const repoOwner = 'khetcompany';
     const repoName = 'khet';
-    const token = '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';
+    const token = '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'; // Bạn có thể thay token ở đây
 
     async function uploadPost() {
       const title = document.getElementById("title").value.trim();
@@ -72,7 +95,7 @@
       const content = tinymce.get("editor").getContent();
 
       if (!title || !filename || !content) {
-        return alert("Vui lòng điền đầy đủ tiêu đề, tên file và nội dung!");
+        return alert("Vui lòng điền đầy đủ thông tin!");
       }
 
       const html = `
@@ -106,7 +129,7 @@
           throw new Error(error.message);
         }
 
-        document.getElementById("status").innerText = "✅ Đăng bài thành công!";
+        document.getElementById("status").innerText = "✅ Đăng bài thành công lên GitHub!";
       } catch (err) {
         document.getElementById("status").innerText = `❌ Lỗi: ${err.message}`;
       }
