@@ -2,96 +2,114 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>CMS Đăng bài lên GitHub</title>
+  <title>📝 CMS dùng TinyMCE - Đăng bài GitHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
   <style>
-    body { font-family: Arial; padding: 2rem; max-width: 600px; margin: auto; }
-    input, textarea { width: 100%; padding: 8px; margin-top: 8px; margin-bottom: 16px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px 20px;
+      background: #2c7be5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
+
+  <script>
+    tinymce.init({
+      selector: '#editor',
+      height: 500,
+      plugins: 'image link lists code',
+      toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | image link | code',
+      branding: false
+    });
+  </script>
 </head>
 <body>
-  <h2>Đăng bài mới</h2>
-  <input type="password" id="token" placeholder="Nhập GitHub Token">
-  <input type="text" id="filename" placeholder="Tên file (vd: bai-viet-1.html)">
-  <input type="text" id="title" placeholder="Tiêu đề bài viết">
-  <textarea id="content" placeholder="Nội dung HTML bài viết"></textarea>
+  <h2>📄 Soạn bài & Đăng lên GitHub</h2>
 
-  <label>Chọn hình ảnh:</label>
-  <input type="file" id="imageFile">
-  
-  <button onclick="uploadPost()">Đăng bài</button>
+  <label>Tiêu đề bài viết</label>
+  <input type="text" id="title" placeholder="Nhập tiêu đề">
+
+  <label>Tên file lưu (vd: bai-viet-1.html)</label>
+  <input type="text" id="filename" placeholder="Tên file (phải có .html)">
+
+  <label>Soạn thảo nội dung</label>
+  <textarea id="editor"></textarea>
+
+  <br><br>
+  <button onclick="uploadPost()">📤 Đăng bài</button>
 
   <p id="status"></p>
 
   <script>
     const repoOwner = 'khetcompany';
-    const repoName = 'khet'; // ← Đổi tên repo của bạn
+    const repoName = 'khet';
+    const token = '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';
 
     async function uploadPost() {
-      const token = document.getElementById("token").value.trim();
-      const filename = document.getElementById("filename").value.trim();
       const title = document.getElementById("title").value.trim();
-      const content = document.getElementById("content").value.trim();
-      const imageFile = document.getElementById("imageFile").files[0];
+      const filename = document.getElementById("filename").value.trim();
+      const content = tinymce.get("editor").getContent();
 
-      if (!filename || !title || !content || !token) {
-        return alert("Hãy điền đầy đủ thông tin!");
+      if (!title || !filename || !content) {
+        return alert("Vui lòng điền đầy đủ tiêu đề, tên file và nội dung!");
       }
 
-      // 1. Upload ảnh nếu có
-      let imagePath = "";
-      if (imageFile) {
-        const imgBase64 = await toBase64(imageFile);
-        const imgPath = `media/img-post/${imageFile.name}`;
-        await uploadToGitHub(imgPath, imgBase64, token);
-        imagePath = imgPath;
-      }
-
-      // 2. Tạo nội dung HTML bài viết
       const html = `
 <!DOCTYPE html>
-<html>
-<head><title>${title}</title></head>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>${title}</title></head>
 <body>
   <h1>${title}</h1>
-  ${imagePath ? `<img src="/${imagePath}" style="max-width:100%">` : ''}
   <div>${content}</div>
 </body>
-</html>`;
+</html>`.trim();
 
       const htmlBase64 = btoa(unescape(encodeURIComponent(html)));
-      await uploadToGitHub(`post/${filename}`, htmlBase64, token);
-      document.getElementById("status").innerText = "🎉 Đăng bài thành công!";
-    }
+      const path = `post/${filename}`;
 
-    async function uploadToGitHub(path, contentBase64, token) {
-      const res = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `token ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          message: `Tạo hoặc cập nhật ${path}`,
-          content: contentBase64
-        })
-      });
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Tạo hoặc cập nhật ${path}`,
+            content: htmlBase64
+          })
+        });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(`❌ Lỗi upload ${path}: ${err.message}`);
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message);
+        }
+
+        document.getElementById("status").innerText = "✅ Đăng bài thành công!";
+      } catch (err) {
+        document.getElementById("status").innerText = `❌ Lỗi: ${err.message}`;
       }
-    }
-
-    function toBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = error => reject(error);
-        reader.readAsDataURL(file);
-      });
     }
   </script>
 </body>
