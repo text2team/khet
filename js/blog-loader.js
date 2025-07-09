@@ -1,7 +1,7 @@
 // Blog Loader - Tự động load bài đăng từ GitHub API
 class BlogLoader {
     constructor() {
-        this.repoOwner = 'text-2'; // Thay bằng username GitHub của bạn
+        this.repoOwner = 'khetcompany'; // Thay bằng username GitHub của bạn
         this.repoName = 'khet'; // Tên repository
         this.postsPath = 'post';
         this.maxPosts = 3;
