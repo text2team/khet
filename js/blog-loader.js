@@ -71,7 +71,13 @@ class BlogLoader {
         const imgTags = doc.querySelectorAll('img');
         for (const img of imgTags) {
             if (img.src && img.src.includes('media/img-post/')) {
-                thumbnail = img.src;
+                // Chuyển về đường dẫn tương đối nếu là ảnh trong media/img-post/
+                const match = img.src.match(/(\/)?media\/img-post\/[\w\-\.]+/);
+                if (match) {
+                    thumbnail = match[0].startsWith('/') ? match[0] : '/' + match[0];
+                } else {
+                    thumbnail = img.src;
+                }
                 break;
             }
         }
