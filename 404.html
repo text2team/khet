@@ -3,83 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Khet mất kết nối </title>
-    <!-- Tải Tailwind CSS để trang web đẹp lung linh, không cần viết CSS nhiều -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>404 - Không tìm thấy trang | Khet Entertainment</title>
+    <script src="https://cdn.tailwindcss.com?v=1.1"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Sử dụng font Inter cho toàn bộ trang để nhìn hiện đại và dễ đọc */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Nền tối cho thêm phần bí ẩn */
-            color: #e2e8f0; /* Chữ sáng nổi bật trên nền tối */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Đảm bảo trang chiếm toàn bộ chiều cao màn hình */
+            background: #fff;
+            color: #333;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Tránh thanh cuộn không mong muốn */
+            position: relative;
+            overflow-x: hidden;
         }
-        /* Hiệu ứng chuyển động nhẹ nhàng cho các phần tử */
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(248, 191, 201, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(248, 191, 201, 0.02) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 48%, rgba(248, 191, 201, 0.01) 50%, transparent 52%);
+            background-size: 100px 100px, 150px 150px, 20px 20px;
+            pointer-events: none;
+            z-index: 0;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(248, 191, 201, 0.005) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(248, 191, 201, 0.005) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
         }
-        /* Hiệu ứng cho nút bấm */
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        .floating-particles {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 1; overflow: hidden;
+        }
+        .particle {
+            position: absolute; width: 4px; height: 4px;
+            background: rgba(248, 191, 201, 0.06);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .error-card {
+            background: rgba(255,255,255,0.85);
+            border: 2px solid #f8bfc9;
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(200,0,60,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 420px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
         .btn-primary {
-            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #c1003b 0%, #ff6a00 100%);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 9999px;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 16px #f8bfc9cc;
+            transition: all 0.2s;
+            border: none;
+            outline: none;
+            display: inline-block;
         }
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #a00030 0%, #ff6a00 100%);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 8px 24px #c1003bcc;
+        }
+        .logo {
+            width: 70px; height: 70px; object-fit: contain; margin: 0 auto 1.2rem auto; display: block;
+        }
+        .footer {
+            background: #222;
+            color: #eee;
+            text-align: center;
+            font-size: 0.95rem;
+            padding: 2rem 0 1rem 0;
+            margin-top: 3rem;
+        }
+        .footer a { color: #f8bfc9; margin: 0 0.5rem; transition: color 0.2s; }
+        .footer a:hover { color: #fff; }
+        @media (max-width: 500px) {
+            .error-card { padding: 1.2rem 0.5rem; max-width: 98vw; }
+            .logo { width: 54px; height: 54px; }
+            .footer { font-size: 0.8rem; }
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4">
-    <div class="text-center bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl max-w-lg w-full transform transition-all duration-500 hover:scale-105 animate-fade-in">
-        <!-- Tiêu đề lỗi 404 to đùng, nổi bật -->
-        <h1 class="text-7xl md:text-9xl font-extrabold text-red-500 mb-4 drop-shadow-lg">404</h1>
-        <!-- Thông báo lỗi thân thiện -->
-        <p class="text-2xl md:text-3xl font-semibold text-gray-200 mb-6">
-            Ối! Hình như bạn lạc đường rồi! 😅
-        </p>
-        <!-- Thông báo đếm ngược về trang chủ -->
-        <p class="text-lg md:text-xl text-gray-400 mb-8">
-            Đừng lo, tớ sẽ đưa bạn về <span class="text-blue-400 font-bold">trang chủ</span> sau <span id="countdown" class="text-blue-400 font-bold">3</span> giây nữa...
-        </p>
-        <!-- Nút quay về trang chủ ngay lập tức -->
-        <a href="/" class="btn-primary inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
-            Về Trang Chủ Ngay! 🚀
-        </a>
+<body>
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-
+    <main class="flex flex-col items-center justify-center min-h-screen relative z-10">
+        <img src="media/logoc.png" alt="Khet Entertainment Logo" class="logo shadow-lg">
+        <div class="error-card animate-fade-in text-center">
+            <h1 class="text-7xl md:text-8xl font-extrabold text-[#c1003b] mb-2 drop-shadow-lg">404</h1>
+            <p class="text-2xl md:text-3xl font-bold mb-3">Không tìm thấy trang</p>
+            <p class="text-base md:text-lg text-gray-600 mb-6">Trang bạn tìm kiếm không tồn tại hoặc đã bị di chuyển.<br>Đừng lo, bạn sẽ được đưa về <span class="text-[#c1003b] font-bold">trang chủ</span> sau <span id="countdown" class="text-[#c1003b] font-bold">3</span> giây...</p>
+            <a href="/" class="btn-primary mt-2"><i class="fas fa-home mr-2"></i>Về Trang Chủ Ngay!</a>
+        </div>
+    </main>
+    <footer class="footer">
+        &copy; khetnews@gmail.com . liên hệ : 0899864943 . Text2 bảo hộ bản quyền . liên hệ mail.text2.click
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="#"><i class="fab fa-facebook-f text-xl"></i></a>
+            <a href="#"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in text-xl"></i></a>
+            <a href="#"><i class="fab fa-instagram text-xl"></i></a>
+        </div>
+    </footer>
     <script>
-        // Lấy thẻ hiển thị số đếm ngược
+        // Đếm ngược và chuyển hướng
         const countdownElement = document.getElementById('countdown');
-        // Thời gian đếm ngược ban đầu
         let timeLeft = 3;
-
-        // Hàm cập nhật số đếm ngược và chuyển hướng
         function updateCountdown() {
-            // Cập nhật nội dung số đếm trên trang
             countdownElement.textContent = timeLeft;
-
-            // Giảm thời gian còn lại
             timeLeft--;
-
-            // Nếu hết thời gian, chuyển hướng về trang chủ
             if (timeLeft < 0) {
-                clearInterval(countdownInterval); // Dừng bộ đếm
-                window.location.href = '/'; // Chuyển hướng về trang chủ (thay bằng URL trang chủ của bạn nếu khác)
+                clearInterval(countdownInterval);
+                window.location.href = '/';
             }
         }
-
-        // Gọi hàm updateCountdown mỗi 1 giây
         const countdownInterval = setInterval(updateCountdown, 1000);
-
-        // Gọi lần đầu tiên để hiển thị số 3 ngay lập tức
         updateCountdown();
     </script>
 </body>
