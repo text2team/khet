@@ -151,9 +151,9 @@
 
         /* Hero section specific styling for background image and overlay */
         .hero-section {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+            background: linear-gradient(135deg, #fff 0%, #f8bfc9 60%, #ffe0b2 100%);
             position: relative;
-            overflow: hidden; /* Ensure content doesn't overflow */
+            overflow: hidden;
         }
 
         .hero-content-area {
@@ -182,9 +182,11 @@
         }
 
         .hero-main-image {
-            max-height: 85%; /* Slightly reduce height for better balance */
-            max-width: 90%; /* Ensure image doesn't overflow container */
-            object-fit: contain; /* Ensure image fits without cropping */
+            max-height: 85%;
+            max-width: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 32px #c1003b33) drop-shadow(0 2px 8px #ffe0b2cc);
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.7s;
         }
 
         /* Styles for small floating icons */
@@ -251,29 +253,39 @@
         }
 
         /* Blog post card styles */
-        .blog-post-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border-radius: 2rem !important;
-            box-shadow: 0 8px 32px 0 rgba(193,0,59,0.10), 0 1.5px 6px 0 rgba(255,224,178,0.10);
+        .blog-post-card, .col, .stats-card, .team-member, .contact, .bg-white\/70, .bg-white\/80 {
+            border-radius: 2.5rem !important;
+            box-shadow: 0 12px 40px 0 rgba(193,0,59,0.14), 0 2px 12px 0 rgba(255,224,178,0.12);
+            background: rgba(255,255,255,0.80);
+            backdrop-filter: blur(12px);
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1), box-shadow 0.5s;
         }
-
-        .blog-post-card:hover {
-            transform: scale(1.06) rotate(-1deg);
-            box-shadow: 0 16px 48px 0 rgba(193,0,59,0.18), 0 3px 12px 0 rgba(255,224,178,0.18);
-            z-index: 2;
+        .blog-post-card:hover, .col:hover, .stats-card:hover, .team-member:hover, .contact:hover, .bg-white\/70:hover, .bg-white\/80:hover {
+            transform: scale(1.08) rotate(-1.5deg);
+            box-shadow: 0 24px 64px 0 rgba(193,0,59,0.22), 0 4px 24px 0 rgba(255,224,178,0.22);
+            z-index: 3;
         }
-
-        .blog-post-card:active {
-            transform: translateY(-2px) scale(0.98);
+        .blog-post-card .post-thumbnail, .col img, .team-member img, .contact img {
+            border-radius: 1.5rem !important;
+            box-shadow: 0 4px 16px 0 rgba(193,0,59,0.10);
+            transition: box-shadow 0.3s, transform 0.3s;
         }
-
-        .blog-post-card .post-thumbnail {
-            transition: transform 0.3s ease;
+        .blog-post-card:hover .post-thumbnail, .col:hover img, .team-member:hover img, .contact:hover img {
+            box-shadow: 0 8px 32px 0 rgba(193,0,59,0.18);
+            transform: scale(1.06) rotate(1deg);
         }
-
-        .blog-post-card:hover .post-thumbnail {
-            transform: scale(1.05);
+        .col .w-16, .col .w-14, .col .w-12, .col .w-8, .col .w-32, .team-member .w-32, .team-member .w-16, .team-member .w-12 {
+            background: linear-gradient(135deg, #f8bfc9 0%, #ffe0b2 100%);
+            box-shadow: 0 2px 8px #c1003b22;
+            border-radius: 1.5rem !important;
+        }
+        .col i, .team-member i, .stats-card i, .contact i {
+            transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+        }
+        .col:hover i, .team-member:hover i, .stats-card:hover i, .contact:hover i {
+            color: #c1003b;
+            text-shadow: 0 0 8px #ffe0b2, 0 0 16px #c1003b44;
+            transform: scale(1.15) rotate(-6deg);
         }
 
         /* Responsive adjustments for hero section */
@@ -295,17 +307,17 @@
                 padding: 0 0.2rem;
             }
             .hero-text-container h1 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
                 line-height: 1.2;
                 margin-bottom: 0.7rem;
             }
             .hero-text-container p {
-                font-size: 1rem;
+                font-size: 1.05rem;
                 line-height: 1.5;
                 margin-bottom: 0.7rem;
             }
             .animated-gradient-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-top: 0.3rem;
             }
             .hero-image-container {
@@ -334,9 +346,8 @@
                 max-width: 180px;
                 justify-content: center;
                 padding: 0.6rem 1rem;
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
-            /* Blog section */
             #blog h2 {
                 font-size: 1.2rem;
             }
@@ -345,21 +356,19 @@
                 border-radius: 1.2rem !important;
             }
             .blog-post-card h3 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .blog-post-card p, .blog-post-card span {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
             }
             #blog-posts-container {
                 grid-template-columns: 1fr !important;
                 gap: 1.2rem !important;
             }
-            /* Section header */
             .section-padding {
                 padding-top: 1.2rem;
                 padding-bottom: 1.2rem;
             }
-            /* Card & icon size */
             .stats-card, .col, .team-member, .contact {
                 min-height: 100px;
                 padding: 0.7rem;
@@ -368,12 +377,11 @@
                 font-size: 1.1rem !important;
             }
             .col h3, .team-member h3 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .col p, .team-member p {
-                font-size: 0.9rem;
+                font-size: 1.05rem;
             }
-            /* Team avatar size */
             .team-member .w-32, .team-member .h-32 {
                 width: 60px !important;
                 height: 60px !important;
@@ -385,23 +393,20 @@
                 box-shadow: 0 0 0 8px #ffe0b2, 0 16px 48px 0 rgba(193,0,59,0.18);
                 transform: scale(1.08) rotate(2deg);
             }
-            /* Partner grid */
             #partners .grid {
                 grid-template-columns: 1fr !important;
                 gap: 1.2rem !important;
             }
-            /* Footer */
             footer {
-                font-size: 0.85rem;
+                font-size: 0.95rem;
                 padding: 1.2rem 0;
             }
-            /* Contact form */
             #contact input, #contact textarea {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
                 padding: 0.7rem 0.7rem 0.7rem 1.2rem;
             }
             #contact button {
-                font-size: 1rem;
+                font-size: 1.1rem;
                 padding: 0.7rem 0;
                 border-radius: 1.2rem !important;
                 box-shadow: 0 2px 8px 0 rgba(193,0,59,0.10);
@@ -410,11 +415,35 @@
                 transform: scale(1.04) translateY(-2px);
                 box-shadow: 0 6px 24px 0 rgba(193,0,59,0.18);
             }
-            /* Icon size in header, nav, and buttons */
             .header-bottom .text-lg, .header-bottom .text-xl, .header-bottom .text-2xl, .header-bottom .text-3xl, .header-bottom .text-4xl,
             nav .text-lg, nav .text-xl, nav .text-2xl, nav .text-3xl, nav .text-4xl,
             .hero-text-container i, .hero-image-container i, .blog-post-card i, .col i, .team-member i, .contact i {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
+            }
+            /* Menu mobile tối ưu */
+            #mobile-menu {
+                padding-top: 60px;
+                font-size: 1.2rem;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(16px);
+            }
+            #mobile-menu nav a {
+                padding: 1rem 0;
+                border-bottom: 1px solid #f8bfc9;
+                width: 100vw;
+                text-align: center;
+                font-weight: 700;
+                color: #c1003b;
+                transition: background 0.2s, color 0.2s;
+            }
+            #mobile-menu nav a:hover {
+                background: #ffe0b2;
+                color: #c1003b;
+            }
+            #close-mobile-menu {
+                top: 18px;
+                right: 18px;
+                font-size: 2.2rem;
             }
         }
         @media (max-width: 480px) {
@@ -426,15 +455,15 @@
                 padding: 0 0.1rem;
             }
             .hero-text-container h1 {
-                font-size: 1rem;
+                font-size: 1.05rem;
                 margin-bottom: 0.5rem;
             }
             .hero-text-container p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 margin-bottom: 0.5rem;
             }
             .animated-gradient-text {
-                font-size: 0.95rem;
+                font-size: 0.98rem;
             }
             .hero-image-container {
                 height: 22vh;
@@ -447,16 +476,16 @@
             .hero-text-container .flex a {
                 max-width: 120px;
                 padding: 0.4rem 0.5rem;
-                font-size: 0.85rem;
+                font-size: 0.95rem;
             }
             #blog h2 {
                 font-size: 1rem;
             }
             .blog-post-card h3 {
-                font-size: 0.9rem;
+                font-size: 0.98rem;
             }
             .blog-post-card p, .blog-post-card span {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .section-padding {
                 padding-top: 0.7rem;
@@ -467,13 +496,13 @@
                 padding: 0.4rem;
             }
             .stats-card .text-2xl, .col .text-2xl, .col .text-3xl, .col .text-4xl, .team-member .text-2xl, .team-member .text-3xl, .team-member .text-4xl, .contact .text-2xl, .contact .text-3xl, .contact .text-4xl {
-                font-size: 0.95rem !important;
+                font-size: 0.98rem !important;
             }
             .col h3, .team-member h3 {
-                font-size: 0.9rem;
+                font-size: 0.98rem;
             }
             .col p, .team-member p {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .team-member .w-32, .team-member .h-32 {
                 width: 40px !important;
@@ -484,21 +513,21 @@
                 gap: 0.7rem !important;
             }
             footer {
-                font-size: 0.75rem;
+                font-size: 0.85rem;
                 padding: 0.7rem 0;
             }
             #contact input, #contact textarea {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 padding: 0.4rem 0.4rem 0.4rem 0.7rem;
             }
             #contact button {
-                font-size: 0.9rem;
+                font-size: 0.98rem;
                 padding: 0.4rem 0;
             }
             .header-bottom .text-lg, .header-bottom .text-xl, .header-bottom .text-2xl, .header-bottom .text-3xl, .header-bottom .text-4xl,
             nav .text-lg, nav .text-xl, nav .text-2xl, nav .text-3xl, nav .text-4xl,
             .hero-text-container i, .hero-image-container i, .blog-post-card i, .col i, .team-member i, .contact i {
-                font-size: 0.85rem !important;
+                font-size: 0.98rem !important;
             }
         }
         #mobile-menu {
@@ -537,13 +566,13 @@
         .animated-gradient-text {
             font-size: 2.2rem;
             font-weight: 900;
-            background: linear-gradient(90deg, #f8bfc9, #ffe0b2, #f8bfc9 80%);
+            background: linear-gradient(90deg, #f8bfc9, #ffe0b2, #c1003b 80%);
             background-size: 200% auto;
             color: transparent;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine-gradient 3s linear infinite;
+            animation: shine-gradient 3s linear infinite, glow-text 2s ease-in-out infinite alternate;
             text-shadow: 0 2px 16px rgba(248,191,201,0.10), 0 1px 0 #fff;
             letter-spacing: 1px;
             display: inline-block;
@@ -552,38 +581,42 @@
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
         }
+        @keyframes glow-text {
+            0% { text-shadow: 0 0 8px #ffe0b2, 0 0 16px #c1003b44; }
+            100% { text-shadow: 0 0 24px #ffe0b2, 0 0 32px #c1003b88; }
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #fff 0%, #f8bfc9 60%, #ffe0b2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-main-image {
+            max-height: 85%;
+            max-width: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 32px #c1003b33) drop-shadow(0 2px 8px #ffe0b2cc);
+            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.7s;
+        }
+        .hero-image-container:hover .hero-main-image {
+            transform: scale(1.04) translateY(-10px) rotate(-2deg);
+            filter: drop-shadow(0 16px 48px #c1003b66) drop-shadow(0 4px 16px #ffe0b2);
+        }
+        .parallax {
+            will-change: transform;
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .cta-glow {
+            box-shadow: 0 0 24px 4px #ffe0b2cc, 0 4px 16px #c1003bcc;
+            animation: cta-glow-anim 1.5s infinite alternate, cta-glow-strong 2.5s infinite alternate;
+        }
+        @keyframes cta-glow-strong {
+            0% { box-shadow: 0 0 24px 4px #ffe0b2cc, 0 4px 16px #c1003bcc; }
+            100% { box-shadow: 0 0 48px 12px #ffe0b2cc, 0 8px 32px #c1003bcc; }
+        }
         @media (max-width: 768px) {
           .hero-description-text {
             display: none !important;
           }
-        }
-        /* Hiệu ứng glow cho nút CTA chính */
-        .cta-glow {
-            box-shadow: 0 0 16px 2px #ffe0b2cc, 0 2px 8px #f8bfc9cc;
-            animation: cta-glow-anim 1.5s infinite alternate;
-        }
-        @keyframes cta-glow-anim {
-            0% { box-shadow: 0 0 16px 2px #ffe0b2cc, 0 2px 8px #f8bfc9cc; }
-            100% { box-shadow: 0 0 32px 8px #ffe0b2cc, 0 4px 16px #f8bfc9cc; }
-        }
-        @media (max-width: 768px) {
-            .header-top {
-                display: none !important;
-            }
-            .header-bottom {
-                padding-top: 0.25rem !important;
-                padding-bottom: 0.25rem !important;
-                border-radius: 1rem !important;
-                min-height: 48px !important;
-            }
-            #main-header {
-                border-radius: 0 0 1.5rem 1.5rem !important;
-                padding-bottom: 0 !important;
-            }
-            #header-logo {
-                height: 2rem !important;
-                max-width: 80px !important;
-            }
         }
         @media (max-width: 768px) {
           .header-top {
@@ -640,6 +673,80 @@
             height: 14px !important;
           }
         }
+        /* ... existing code ... */
+        .fab, .fas {
+            transition: color 0.3s, text-shadow 0.3s, transform 0.3s;
+        }
+        .fab:hover, .fas:hover {
+            color: #ffe0b2 !important;
+            text-shadow: 0 0 12px #c1003b, 0 0 24px #ffe0b2;
+            transform: scale(1.18) rotate(-8deg);
+        }
+        .cta-glow:hover {
+            animation: cta-glow-strong 0.7s infinite alternate;
+            filter: brightness(1.08) drop-shadow(0 0 16px #ffe0b2);
+        }
+        .blog-post-card .post-thumbnail:hover, .team-member img:hover, .col img:hover, .contact img:hover {
+            filter: brightness(1.08) drop-shadow(0 0 16px #c1003b);
+            transform: scale(1.10) rotate(2deg);
+        }
+        a.button, a.cta-glow, button.cta-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        a.button::after, a.cta-glow::after, button.cta-glow::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, #ffe0b2 0%, #c1003b 100%);
+            opacity: 0.18;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        a.button:hover::after, a.cta-glow:hover::after, button.cta-glow:hover::after {
+            width: 220%;
+            height: 220%;
+        }
+        /* ... existing code ... */
+        .text-red-600, .hover\:text-red-600:hover, .text-red-500, .hover\:text-red-500:hover {
+            color: #c1003b !important;
+        }
+        .border-red-600, .hover\:border-red-600:hover, .border-red-500, .hover\:border-red-500:hover {
+            border-color: #c1003b !important;
+        }
+        .bg-red-600, .hover\:bg-red-600:hover, .bg-red-500, .hover\:bg-red-500:hover {
+            background-color: #c1003b !important;
+        }
+        .focus\:ring-red-500:focus, .focus\:ring-red-600:focus {
+            --tw-ring-color: #c1003b !important;
+        }
+        .text-yellow-500, .hover\:text-yellow-500:hover {
+            color: #ffe0b2 !important;
+        }
+        .bg-yellow-100, .hover\:bg-yellow-100:hover {
+            background-color: #ffe0b2 !important;
+        }
+        .border-yellow-500, .hover\:border-yellow-500:hover {
+            border-color: #ffe0b2 !important;
+        }
+        .bg-gray-900, .hover\:bg-gray-900:hover {
+            background-color: #c1003b !important;
+        }
+        .text-gray-900, .hover\:text-gray-900:hover {
+            color: #c1003b !important;
+        }
+        .border-gray-300, .hover\:border-gray-300:hover {
+            border-color: #f8bfc9 !important;
+        }
+        .bg-gray-50, .hover\:bg-gray-50:hover {
+            background-color: #f8bfc9 !important;
+        }
+        /* ... existing code ... */
     </style>
     <script type="application/ld+json">
     {
@@ -702,8 +809,8 @@
             </div>
             <div class="header-bottom flex flex-row items-center justify-between py-2 px-2 sm:px-4 md:px-8 lg:px-12 bg-white rounded-full shadow-md transition-all duration-300 gap-2 sm:gap-4 md:gap-8">
                 <!-- Hamburger menu button (mobile only) -->
-                <button id="mobile-menu-btn" class="md:hidden flex items-center px-2 py-2 text-[#c1003b] focus:outline-none">
-                  <i class="fas fa-bars text-2xl"></i>
+                <button id="mobile-menu-btn" class="md:hidden flex items-center px-2 py-2 text-[#c1003b] focus:outline-none" aria-label="Mở menu di động">
+                  <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
                 <nav class="flex-1 flex justify-center overflow-x-auto whitespace-nowrap gap-x-2 sm:gap-x-4 md:gap-x-8 hidden md:flex">
                     <a href="#about" class="text-gray-800 hover:text-red-600 font-semibold text-xs sm:text-sm md:text-base tracking-wide transition-colors duration-200 px-1 sm:px-2">Giới Thiệu</a>
@@ -732,7 +839,7 @@
 
     <!-- Mobile menu overlay -->
     <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white z-50 flex flex-col items-center justify-start pt-20 transition-transform duration-300 transform translate-x-full md:hidden">
-      <button id="close-mobile-menu" class="absolute top-4 right-4 text-3xl text-[#c1003b]"><i class="fas fa-times"></i></button>
+      <button id="close-mobile-menu" class="absolute top-4 right-4 text-3xl text-[#c1003b]" aria-label="Đóng menu di động"><i class="fas fa-times" aria-hidden="true"></i></button>
       <nav class="flex flex-col gap-6 mt-8 w-full items-center">
         <a href="#about" class="text-gray-800 font-bold text-lg">Giới Thiệu</a>
         <a href="#blog" class="text-gray-800 font-bold text-lg">BÀI ĐĂNG</a>
@@ -749,29 +856,29 @@
         <div class="container mx-auto max-w-7xl h-full hero-content-area">
             <div class="hero-text-container" data-aos="fade-right" data-aos-delay="200">
                 <p class="text-red-500 text-lg font-semibold mb-3 flex items-center animate-pulse">
-                    <i class="fas fa-gem mr-2"></i> Khet Entertainment
+                    <i class="fas fa-gem mr-2" aria-hidden="true"></i> Khet Entertainment
                 </p>
                 <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight mb-6 drop-shadow-lg">
-                    <span id="typed-headline"></span>
+                    <span id="typed-headline" class="animated-gradient-text"></span>
                 </h1>
                 <div class="flex flex-wrap gap-4 mt-8">
                     <a href="#about"
                        class="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-lg shadow-md transition-all duration-300
-                              bg-white text-[#c1003b] border-2 border-[#c1003b] hover:bg-[#c1003b] hover:text-white hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#c1003b]/20">
+                              bg-white text-[#c1003b] border-2 border-[#c1003b] hover:bg-[#c1003b] hover:text-white hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#c1003b]/20 cta-glow">
                         <i class="fas fa-rocket"></i>
                         Khám phá
                     </a>
                     <a href="#contact"
                        class="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-all duration-300
                               border-2 border-[#c1003b] text-[#c1003b] bg-white hover:bg-[#c1003b] hover:text-white hover:scale-105
-                              focus:outline-none focus:ring-4 focus:ring-[#c1003b]/30">
+                              focus:outline-none focus:ring-4 focus:ring-[#c1003b]/30 cta-glow">
                         <i class="fas fa-phone"></i>
                         Liên hệ
                     </a>
                 </div>
             </div>
 
-            <div class="hero-image-container" data-aos="fade-left" data-aos-delay="400">
+            <div class="hero-image-container parallax" data-aos="fade-left" data-aos-delay="400">
                 <img src="media/page1/thumnel-page1.png" alt="Khet Entertainment Team - Truyền thông số, giải trí, showbiz, âm nhạc, phim ảnh" class="hero-main-image object-cover">
 
                 <div class="floating-icon icon-1 text-2xl md:text-3xl lg:text-4xl" style="top: 15%; left: 10%;">
@@ -802,7 +909,7 @@
         <div class="container mx-auto max-w-7xl">
             <!-- Section Header -->
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-[#c1003b] mb-4">
                     Nâng tầm <span class="text-[#c1003b]">giá trị</span> giải trí cùng Khet Entertainment
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -1072,7 +1179,7 @@
     <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="partners" data-aos="fade-up" data-aos-delay="600">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 flex items-center justify-center gap-3" data-aos="zoom-in">
-                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><img src="" alt="logo" class="w-6 h-6 inline-block">
+                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><img src="media/logoc.png" alt="Khet Entertainment Logo" class="w-6 h-6 inline-block"></span>
                 Hệ Thống <span class="text-[#c1003b]">Kênh</span> của Khet Entertainment
             </h2>
             
@@ -1350,7 +1457,7 @@
                 <div class="col text-center" data-aos="zoom-in-up">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1360,7 +1467,7 @@
                 <div class="col text-center" data-aos="flip-left" data-aos-delay="200">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1370,7 +1477,7 @@
                 <div class="col text-center" data-aos="flip-right" data-aos-delay="300">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1380,7 +1487,7 @@
                 <div class="col text-center" data-aos="zoom-in-up" data-aos-delay="400">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1390,7 +1497,7 @@
                 <div class="col text-center" data-aos="zoom-in-down" data-aos-delay="500">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1400,7 +1507,7 @@
                 <div class="col text-center" data-aos="fade-up" data-aos-delay="600">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1410,7 +1517,7 @@
                 <div class="col text-center" data-aos="fade-up" data-aos-delay="700">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1420,7 +1527,7 @@
                 <div class="col text-center" data-aos="fade-up" data-aos-delay="800">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1430,7 +1537,7 @@
                 <div class="col text-center" data-aos="fade-up" data-aos-delay="900">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1440,7 +1547,7 @@
                 <div class="col text-center" data-aos="fade-up" data-aos-delay="1000">
                     <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6 border-2 border-transparent hover:border-[#c1003b] transition-all duration-300 group flex flex-col items-center">
                         <div class="w-32 h-32 rounded-full border-4 border-gradient-to-br from-[#c1003b] to-[#f8e9ef] shadow-lg mb-4 overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                            <img src="https://scontent.fsgn8-3.fna.fbcdn.net/v/t39.30808-6/474619849_1322074692309750_7641182318710179607_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHKTweZSFMRPwuPW51EoyqH8zk6VflggMXzOTpV-WCAxRbsbeWOnoGuawUP7O4fIpO-O8ZlgCReTS0kJOlnWeyJ&_nc_ohc=m8pjB1Tw6HAQ7kNvwHqQytm&_nc_oc=AdmUUHv6BV-oiwHDYjJvWIEo02A2kIrF2rPcGPEPtqhcJ2HL5wBqCBPZ5zk7jFv1TTA&_nc_zt=23&_nc_ht=scontent.fsgn8-3.fna&_nc_gid=diGsDr6XbhKsgFCXUWCQ4A&oh=00_AfRoD_DVoChXBba7y1ApMQpdevD8qqW0IhGwBz4QUFL_eg&oe=68734A75" alt="Ông Hoang Duc" class="w-full h-full object-cover">
+                            <img src="https://placehold.co/128x128?text=Member" alt="Thành viên Khet Entertainment" class="w-full h-full object-cover">
                         </div>
                         <h3 class="font-semibold text-xl text-gray-800 group-hover:text-[#c1003b] transition">Hoàng Đức </h3>
                         <p class="text-sm text-gray-600">Giám đốc Đều Hành </p>
@@ -1516,132 +1623,23 @@
     </section>
 
     <!-- Projects Section (Slideshow) -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="projects" data-aos="fade-up" data-aos-delay="650">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center gap-3" data-aos="zoom-in">
-                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-project-diagram"></i></span>
-                Các <span class="text-[#c1003b]">Dự Án</span> Nổi Bật
-            </h2>
-            <div class="relative w-full max-w-2xl mx-auto">
-                <div id="project-carousel" class="overflow-hidden rounded-2xl shadow-xl bg-white/80">
-                    <img id="project-slide-img" src="media/img-post/project1.png" alt="Dự án 1" class="w-full h-56 sm:h-72 md:h-96 object-cover transition-all duration-700 rounded-2xl">
-                    <div id="project-slide-caption" class="p-2 sm:p-4 text-center text-base sm:text-lg md:text-xl font-semibold text-gray-700">Dự án 1: Mô tả ngắn về dự án 1</div>
-                </div>
-                <!-- Optional: Dots navigation -->
-                <div class="flex justify-center gap-2 mt-2 sm:mt-4" id="project-dots">
-                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#c1003b] rounded-full inline-block opacity-80 cursor-pointer" data-index="0"></span>
-                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="1"></span>
-                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="2"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <style>
-    @media (max-width: 640px) {
-      #project-carousel img {
-        border-radius: 1rem;
-      }
-      #project-slide-caption {
-        font-size: 1rem;
-        padding: 0.5rem 0.2rem;
-      }
-      #project-dots span {
-        width: 10px !important;
-        height: 10px !important;
-      }
-    }
-    @media (min-width: 768px) {
-      #project-carousel img {
-        border-radius: 2rem;
-      }
-      #project-slide-caption {
-        font-size: 1.25rem;
-        padding: 1rem 0.5rem;
-      }
-      #project-dots span {
-        width: 14px !important;
-        height: 14px !important;
-      }
-    }
-    </style>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-  fetch('media/dt/list.json')
-    .then(response => {
-      if (!response.ok) throw new Error('Không tìm thấy file list.json');
-      return response.json();
-    })
-    .then(images => {
-      if (!Array.isArray(images) || images.length === 0) {
-        throw new Error('Danh sách ảnh rỗng hoặc không hợp lệ');
-      }
-      var projects = images.map((img, idx) => ({
-        img: img,
-        caption: 'Dự án ' + (idx + 1)
-      }));
-      var current = 0;
-      var imgEl = document.getElementById('project-slide-img');
-      var captionEl = document.getElementById('project-slide-caption');
-      var dotsContainer = document.getElementById('project-dots');
-      if (!imgEl || !captionEl || !dotsContainer) {
-        throw new Error('Thiếu phần tử HTML slideshow');
-      }
-      // Tạo dots
-      dotsContainer.innerHTML = '';
-      projects.forEach((_, i) => {
-        var dot = document.createElement('span');
-        dot.className = 'w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer';
-        dot.setAttribute('data-index', i);
-        dotsContainer.appendChild(dot);
-      });
-      var dots = dotsContainer.querySelectorAll('span');
-      function showProject(idx) {
-        imgEl.src = projects[idx].img;
-        imgEl.alt = projects[idx].caption;
-        captionEl.textContent = projects[idx].caption;
-        dots.forEach(function(dot, i) {
-          dot.classList.toggle('bg-[#c1003b]', i === idx);
-          dot.classList.toggle('bg-gray-400', i !== idx);
-          dot.style.opacity = (i === idx) ? '0.8' : '0.5';
-        });
-        current = idx;
-      }
-      var interval = setInterval(function() {
-        var next = (current + 1) % projects.length;
-        showProject(next);
-      }, 2000);
-      dots.forEach(function(dot, i) {
-        dot.onclick = function() {
-          clearInterval(interval);
-          showProject(i);
-          interval = setInterval(function() {
-            var next = (current + 1) % projects.length;
-            showProject(next);
-          }, 2000);
-        };
-      });
-      showProject(0);
-    })
-    .catch(err => {
-      console.error('Lỗi slideshow dự án:', err);
-      var imgEl = document.getElementById('project-slide-img');
-      var captionEl = document.getElementById('project-slide-caption');
-      if (imgEl && captionEl) {
-        imgEl.style.display = 'none';
-        captionEl.textContent = 'Không thể tải danh sách dự án!';
-      }
-    });
-});
-</script>
-    <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
+    
+    <!-- Đã xóa phần Projects Section theo yêu cầu -->
+
+    <footer class="bg-gradient-to-r from-[#c1003b] via-[#ffe0b2] to-[#c1003b] text-gray-100 py-12 text-center text-base animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
         <div class="container mx-auto max-w-7xl px-4">
-            <p>&copy; khetnews@gmail.com . liên hệ : 0899864943 . Text2 bảo hộ bản quyền . liên hệ mail.text2.click  </p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300"><i class="fab fa-instagram text-xl"></i></a>
+            <div class="mb-4">
+                <span class="text-2xl font-bold tracking-wide">Khet Entertainment</span>
+                <span class="block text-lg mt-2 font-semibold text-[#c1003b]">Kết nối giới trẻ với nghệ thuật, giải trí, showbiz, âm nhạc, phim ảnh.</span>
             </div>
+            <p class="mb-4">&copy; 2025 Khet Entertainment. Email: <a href="mailto:khetnews@gmail.com" class="underline hover:text-white">khetnews@gmail.com</a> | Liên hệ: <a href="tel:0899864943" class="underline hover:text-white">0899864943</a></p>
+            <div class="flex justify-center space-x-6 mt-6 mb-4">
+                <a href="https://www.facebook.com/khetentertainment" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#c1003b] transition-colors duration-300"><i class="fab fa-facebook-f text-3xl" aria-hidden="true"></i></a>
+                <a href="https://www.youtube.com/@khet_news" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#c1003b] transition-colors duration-300"><i class="fab fa-youtube text-3xl" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@khetmusic_" target="_blank" rel="noopener noreferrer" class="text-white hover:text-[#c1003b] transition-colors duration-300"><i class="fab fa-tiktok text-3xl" aria-hidden="true"></i></a>
+                <a href="#" class="text-white hover:text-[#c1003b] transition-colors duration-300"><i class="fab fa-instagram text-3xl" aria-hidden="true"></i></a>
+            </div>
+            <div class="mt-4 text-sm text-gray-200 italic">"Nền tảng truyền thông số hàng đầu cho giới trẻ Việt Nam."</div>
         </div>
     </footer>
 
