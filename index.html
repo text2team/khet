@@ -1524,7 +1524,7 @@
             </h2>
             <div class="relative w-full max-w-2xl mx-auto">
                 <div id="project-carousel" class="overflow-hidden rounded-2xl shadow-xl bg-white/80">
-                    <img id="project-slide-img" src="media/dt/dt1.jpg" alt="Dự án 1" class="w-full h-56 sm:h-72 md:h-96 object-cover transition-all duration-700 rounded-2xl">
+                    <img id="project-slide-img" src="media/img-post/project1.png" alt="Dự án 1" class="w-full h-56 sm:h-72 md:h-96 object-cover transition-all duration-700 rounded-2xl">
                     <div id="project-slide-caption" class="p-2 sm:p-4 text-center text-base sm:text-lg md:text-xl font-semibold text-gray-700">Dự án 1: Mô tả ngắn về dự án 1</div>
                 </div>
                 <!-- Optional: Dots navigation -->
@@ -1565,44 +1565,73 @@
     }
     </style>
     <script>
-(function() {
-  // Danh sách dự án (ảnh và mô tả)
-  var projects = [
-    { img: 'media/img-post/project1.png', caption: 'Dự án 1: Mô tả ngắn về dự án 1' },
-    { img: 'media/img-post/project2.png', caption: 'Dự án 2: Mô tả ngắn về dự án 2' },
-    { img: 'media/img-post/project3.png', caption: 'Dự án 3: Mô tả ngắn về dự án 3' }
-  ];
-  var current = 0;
-  var imgEl = document.getElementById('project-slide-img');
-  var captionEl = document.getElementById('project-slide-caption');
-  var dots = document.querySelectorAll('#project-dots span');
-  function showProject(idx) {
-    imgEl.src = projects[idx].img;
-    imgEl.alt = projects[idx].caption;
-    captionEl.textContent = projects[idx].caption;
-    dots.forEach(function(dot, i) {
-      dot.classList.toggle('bg-[#c1003b]', i === idx);
-      dot.classList.toggle('bg-gray-400', i !== idx);
-      dot.style.opacity = (i === idx) ? '0.8' : '0.5';
-    });
-    current = idx;
-  }
-  var interval = setInterval(function() {
-    var next = (current + 1) % projects.length;
-    showProject(next);
-  }, 2000);
-  dots.forEach(function(dot, i) {
-    dot.onclick = function() {
-      clearInterval(interval);
-      showProject(i);
-      interval = setInterval(function() {
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('media/dt/list.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Không tìm thấy file list.json');
+      return response.json();
+    })
+    .then(images => {
+      if (!Array.isArray(images) || images.length === 0) {
+        throw new Error('Danh sách ảnh rỗng hoặc không hợp lệ');
+      }
+      var projects = images.map((img, idx) => ({
+        img: img,
+        caption: 'Dự án ' + (idx + 1)
+      }));
+      var current = 0;
+      var imgEl = document.getElementById('project-slide-img');
+      var captionEl = document.getElementById('project-slide-caption');
+      var dotsContainer = document.getElementById('project-dots');
+      if (!imgEl || !captionEl || !dotsContainer) {
+        throw new Error('Thiếu phần tử HTML slideshow');
+      }
+      // Tạo dots
+      dotsContainer.innerHTML = '';
+      projects.forEach((_, i) => {
+        var dot = document.createElement('span');
+        dot.className = 'w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer';
+        dot.setAttribute('data-index', i);
+        dotsContainer.appendChild(dot);
+      });
+      var dots = dotsContainer.querySelectorAll('span');
+      function showProject(idx) {
+        imgEl.src = projects[idx].img;
+        imgEl.alt = projects[idx].caption;
+        captionEl.textContent = projects[idx].caption;
+        dots.forEach(function(dot, i) {
+          dot.classList.toggle('bg-[#c1003b]', i === idx);
+          dot.classList.toggle('bg-gray-400', i !== idx);
+          dot.style.opacity = (i === idx) ? '0.8' : '0.5';
+        });
+        current = idx;
+      }
+      var interval = setInterval(function() {
         var next = (current + 1) % projects.length;
         showProject(next);
       }, 2000);
-    };
-  });
-  showProject(0);
-})();
+      dots.forEach(function(dot, i) {
+        dot.onclick = function() {
+          clearInterval(interval);
+          showProject(i);
+          interval = setInterval(function() {
+            var next = (current + 1) % projects.length;
+            showProject(next);
+          }, 2000);
+        };
+      });
+      showProject(0);
+    })
+    .catch(err => {
+      console.error('Lỗi slideshow dự án:', err);
+      var imgEl = document.getElementById('project-slide-img');
+      var captionEl = document.getElementById('project-slide-caption');
+      if (imgEl && captionEl) {
+        imgEl.style.display = 'none';
+        captionEl.textContent = 'Không thể tải danh sách dự án!';
+      }
+    });
+});
 </script>
     <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
         <div class="container mx-auto max-w-7xl px-4">
