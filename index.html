@@ -1446,6 +1446,49 @@
         </div>
     </section>
 
+    <!-- Partners Company Section (NEW) -->
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="partners-company" data-aos="fade-up" data-aos-delay="750">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center gap-3" data-aos="zoom-in">
+                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-handshake"></i></span>
+                Đối tác <span class="text-[#c1003b]">Công ty</span>
+            </h2>
+            <p class="text-center text-lg text-gray-600 mb-10 max-w-2xl mx-auto">Khet Entertainment tự hào hợp tác cùng các công ty, thương hiệu lớn trong lĩnh vực truyền thông, giải trí, công nghệ và nhiều ngành nghề khác.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
+                <!-- Partner 1 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+1" alt="Đối tác 1" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty A</span>
+                </div>
+                <!-- Partner 2 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+2" alt="Đối tác 2" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty B</span>
+                </div>
+                <!-- Partner 3 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+3" alt="Đối tác 3" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty C</span>
+                </div>
+                <!-- Partner 4 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+4" alt="Đối tác 4" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty D</span>
+                </div>
+                <!-- Partner 5 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+5" alt="Đối tác 5" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty E</span>
+                </div>
+                <!-- Partner 6 -->
+                <div class="bg-white/80 rounded-xl shadow p-4 flex flex-col items-center border border-[#c1003b]/10">
+                    <img src="https://placehold.co/120x60/eee/333?text=Logo+6" alt="Đối tác 6" class="mb-2 w-24 h-12 object-contain">
+                    <span class="text-sm font-semibold text-gray-700">Công ty F</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
         <div class="container mx-auto max-w-7xl px-4">
@@ -1609,6 +1652,67 @@
     if (closeBtn) closeBtn.onclick = closeMenu;
     closeMenu();
   });
+})();
+</script>
+    <!-- Projects Section (Slideshow) -->
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="projects" data-aos="fade-up" data-aos-delay="650">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center gap-3" data-aos="zoom-in">
+                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-project-diagram"></i></span>
+                Các <span class="text-[#c1003b]">Dự Án</span> Nổi Bật
+            </h2>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <div id="project-carousel" class="overflow-hidden rounded-2xl shadow-xl bg-white/80">
+                    <img id="project-slide-img" src="media/img-post/project1.png" alt="Dự án 1" class="w-full h-64 object-cover transition-all duration-700">
+                    <div id="project-slide-caption" class="p-4 text-center text-lg font-semibold text-gray-700">Dự án 1: Mô tả ngắn về dự án 1</div>
+                </div>
+                <!-- Optional: Dots navigation -->
+                <div class="flex justify-center gap-2 mt-4" id="project-dots">
+                    <span class="w-3 h-3 bg-[#c1003b] rounded-full inline-block opacity-80 cursor-pointer" data-index="0"></span>
+                    <span class="w-3 h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="1"></span>
+                    <span class="w-3 h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+(function() {
+  // Danh sách dự án (ảnh và mô tả)
+  var projects = [
+    { img: 'media/img-post/project1.png', caption: 'Dự án 1: Mô tả ngắn về dự án 1' },
+    { img: 'media/img-post/project2.png', caption: 'Dự án 2: Mô tả ngắn về dự án 2' },
+    { img: 'media/img-post/project3.png', caption: 'Dự án 3: Mô tả ngắn về dự án 3' }
+  ];
+  var current = 0;
+  var imgEl = document.getElementById('project-slide-img');
+  var captionEl = document.getElementById('project-slide-caption');
+  var dots = document.querySelectorAll('#project-dots span');
+  function showProject(idx) {
+    imgEl.src = projects[idx].img;
+    imgEl.alt = projects[idx].caption;
+    captionEl.textContent = projects[idx].caption;
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('bg-[#c1003b]', i === idx);
+      dot.classList.toggle('bg-gray-400', i !== idx);
+      dot.style.opacity = (i === idx) ? '0.8' : '0.5';
+    });
+    current = idx;
+  }
+  var interval = setInterval(function() {
+    var next = (current + 1) % projects.length;
+    showProject(next);
+  }, 2000);
+  dots.forEach(function(dot, i) {
+    dot.onclick = function() {
+      clearInterval(interval);
+      showProject(i);
+      interval = setInterval(function() {
+        var next = (current + 1) % projects.length;
+        showProject(next);
+      }, 2000);
+    };
+  });
+  showProject(0);
 })();
 </script>
 </body>
