@@ -614,6 +614,32 @@
               display: flex !important;
           }
         }
+        @media (max-width: 640px) {
+          #project-carousel img {
+            border-radius: 1rem;
+          }
+          #project-slide-caption {
+            font-size: 1rem;
+            padding: 0.5rem 0.2rem;
+          }
+          #project-dots span {
+            width: 10px !important;
+            height: 10px !important;
+          }
+        }
+        @media (min-width: 768px) {
+          #project-carousel img {
+            border-radius: 2rem;
+          }
+          #project-slide-caption {
+            font-size: 1.25rem;
+            padding: 1rem 0.5rem;
+          }
+          #project-dots span {
+            width: 14px !important;
+            height: 14px !important;
+          }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -1489,7 +1515,95 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Projects Section (Slideshow) -->
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="projects" data-aos="fade-up" data-aos-delay="650">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center gap-3" data-aos="zoom-in">
+                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-project-diagram"></i></span>
+                Các <span class="text-[#c1003b]">Dự Án</span> Nổi Bật
+            </h2>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <div id="project-carousel" class="overflow-hidden rounded-2xl shadow-xl bg-white/80">
+                    <img id="project-slide-img" src="media/img-post/project1.png" alt="Dự án 1" class="w-full h-56 sm:h-72 md:h-96 object-cover transition-all duration-700 rounded-2xl">
+                    <div id="project-slide-caption" class="p-2 sm:p-4 text-center text-base sm:text-lg md:text-xl font-semibold text-gray-700">Dự án 1: Mô tả ngắn về dự án 1</div>
+                </div>
+                <!-- Optional: Dots navigation -->
+                <div class="flex justify-center gap-2 mt-2 sm:mt-4" id="project-dots">
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#c1003b] rounded-full inline-block opacity-80 cursor-pointer" data-index="0"></span>
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="1"></span>
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+    @media (max-width: 640px) {
+      #project-carousel img {
+        border-radius: 1rem;
+      }
+      #project-slide-caption {
+        font-size: 1rem;
+        padding: 0.5rem 0.2rem;
+      }
+      #project-dots span {
+        width: 10px !important;
+        height: 10px !important;
+      }
+    }
+    @media (min-width: 768px) {
+      #project-carousel img {
+        border-radius: 2rem;
+      }
+      #project-slide-caption {
+        font-size: 1.25rem;
+        padding: 1rem 0.5rem;
+      }
+      #project-dots span {
+        width: 14px !important;
+        height: 14px !important;
+      }
+    }
+    </style>
+    <script>
+(function() {
+  // Danh sách dự án (ảnh và mô tả)
+  var projects = [
+    { img: 'media/img-post/project1.png', caption: 'Dự án 1: Mô tả ngắn về dự án 1' },
+    { img: 'media/img-post/project2.png', caption: 'Dự án 2: Mô tả ngắn về dự án 2' },
+    { img: 'media/img-post/project3.png', caption: 'Dự án 3: Mô tả ngắn về dự án 3' }
+  ];
+  var current = 0;
+  var imgEl = document.getElementById('project-slide-img');
+  var captionEl = document.getElementById('project-slide-caption');
+  var dots = document.querySelectorAll('#project-dots span');
+  function showProject(idx) {
+    imgEl.src = projects[idx].img;
+    imgEl.alt = projects[idx].caption;
+    captionEl.textContent = projects[idx].caption;
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('bg-[#c1003b]', i === idx);
+      dot.classList.toggle('bg-gray-400', i !== idx);
+      dot.style.opacity = (i === idx) ? '0.8' : '0.5';
+    });
+    current = idx;
+  }
+  var interval = setInterval(function() {
+    var next = (current + 1) % projects.length;
+    showProject(next);
+  }, 2000);
+  dots.forEach(function(dot, i) {
+    dot.onclick = function() {
+      clearInterval(interval);
+      showProject(i);
+      interval = setInterval(function() {
+        var next = (current + 1) % projects.length;
+        showProject(next);
+      }, 2000);
+    };
+  });
+  showProject(0);
+})();
+</script>
     <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
         <div class="container mx-auto max-w-7xl px-4">
             <p>&copy; khetnews@gmail.com . liên hệ : 0899864943 . Text2 bảo hộ bản quyền . liên hệ mail.text2.click  </p>
@@ -1652,67 +1766,6 @@
     if (closeBtn) closeBtn.onclick = closeMenu;
     closeMenu();
   });
-})();
-</script>
-    <!-- Projects Section (Slideshow) -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="projects" data-aos="fade-up" data-aos-delay="650">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-8 flex items-center justify-center gap-3" data-aos="zoom-in">
-                <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-project-diagram"></i></span>
-                Các <span class="text-[#c1003b]">Dự Án</span> Nổi Bật
-            </h2>
-            <div class="relative w-full max-w-2xl mx-auto">
-                <div id="project-carousel" class="overflow-hidden rounded-2xl shadow-xl bg-white/80">
-                    <img id="project-slide-img" src="media/img-post/project1.png" alt="Dự án 1" class="w-full h-64 object-cover transition-all duration-700">
-                    <div id="project-slide-caption" class="p-4 text-center text-lg font-semibold text-gray-700">Dự án 1: Mô tả ngắn về dự án 1</div>
-                </div>
-                <!-- Optional: Dots navigation -->
-                <div class="flex justify-center gap-2 mt-4" id="project-dots">
-                    <span class="w-3 h-3 bg-[#c1003b] rounded-full inline-block opacity-80 cursor-pointer" data-index="0"></span>
-                    <span class="w-3 h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="1"></span>
-                    <span class="w-3 h-3 bg-gray-400 rounded-full inline-block opacity-50 cursor-pointer" data-index="2"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script>
-(function() {
-  // Danh sách dự án (ảnh và mô tả)
-  var projects = [
-    { img: 'media/img-post/project1.png', caption: 'Dự án 1: Mô tả ngắn về dự án 1' },
-    { img: 'media/img-post/project2.png', caption: 'Dự án 2: Mô tả ngắn về dự án 2' },
-    { img: 'media/img-post/project3.png', caption: 'Dự án 3: Mô tả ngắn về dự án 3' }
-  ];
-  var current = 0;
-  var imgEl = document.getElementById('project-slide-img');
-  var captionEl = document.getElementById('project-slide-caption');
-  var dots = document.querySelectorAll('#project-dots span');
-  function showProject(idx) {
-    imgEl.src = projects[idx].img;
-    imgEl.alt = projects[idx].caption;
-    captionEl.textContent = projects[idx].caption;
-    dots.forEach(function(dot, i) {
-      dot.classList.toggle('bg-[#c1003b]', i === idx);
-      dot.classList.toggle('bg-gray-400', i !== idx);
-      dot.style.opacity = (i === idx) ? '0.8' : '0.5';
-    });
-    current = idx;
-  }
-  var interval = setInterval(function() {
-    var next = (current + 1) % projects.length;
-    showProject(next);
-  }, 2000);
-  dots.forEach(function(dot, i) {
-    dot.onclick = function() {
-      clearInterval(interval);
-      showProject(i);
-      interval = setInterval(function() {
-        var next = (current + 1) % projects.length;
-        showProject(next);
-      }, 2000);
-    };
-  });
-  showProject(0);
 })();
 </script>
 </body>
