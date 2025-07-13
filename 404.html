@@ -1,165 +1,37 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Không tìm thấy trang | Khet Entertainment</title>
-    <script src="https://cdn.tailwindcss.com?v=1.1"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #fff;
-            color: #333;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-            overflow-x: hidden;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(248, 191, 201, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(248, 191, 201, 0.02) 0%, transparent 50%),
-                linear-gradient(45deg, transparent 48%, rgba(248, 191, 201, 0.01) 50%, transparent 52%);
-            background-size: 100px 100px, 150px 150px, 20px 20px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(rgba(248, 191, 201, 0.005) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(248, 191, 201, 0.005) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 0;
-            animation: gridMove 20s linear infinite;
-        }
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-        .floating-particles {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 1; overflow: hidden;
-        }
-        .particle {
-            position: absolute; width: 4px; height: 4px;
-            background: rgba(248, 191, 201, 0.06);
-            border-radius: 50%;
-            animation: float-particle 15s infinite linear;
-        }
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
-        @keyframes float-particle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-        .error-card {
-            background: rgba(255,255,255,0.85);
-            border: 2px solid #f8bfc9;
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(200,0,60,0.08);
-            padding: 2.5rem 2rem 2rem 2rem;
-            max-width: 420px;
-            margin: 0 auto;
-            z-index: 2;
-            position: relative;
-        }
-        .btn-primary {
-            background: linear-gradient(90deg, #c1003b 0%, #ff6a00 100%);
-            color: #fff;
-            font-weight: 700;
-            border-radius: 9999px;
-            padding: 0.9rem 2.5rem;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 16px #f8bfc9cc;
-            transition: all 0.2s;
-            border: none;
-            outline: none;
-            display: inline-block;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(90deg, #a00030 0%, #ff6a00 100%);
-            transform: scale(1.04) translateY(-2px);
-            box-shadow: 0 8px 24px #c1003bcc;
-        }
-        .logo {
-            width: 70px; height: 70px; object-fit: contain; margin: 0 auto 1.2rem auto; display: block;
-        }
-        .footer {
-            background: #222;
-            color: #eee;
-            text-align: center;
-            font-size: 0.95rem;
-            padding: 2rem 0 1rem 0;
-            margin-top: 3rem;
-        }
-        .footer a { color: #f8bfc9; margin: 0 0.5rem; transition: color 0.2s; }
-        .footer a:hover { color: #fff; }
-        @media (max-width: 500px) {
-            .error-card { padding: 1.2rem 0.5rem; max-width: 98vw; }
-            .logo { width: 54px; height: 54px; }
-            .footer { font-size: 0.8rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    a.fullscreen-link {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    a.fullscreen-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Căn chỉnh cho ảnh đầy mà không méo */
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="floating-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-    <main class="flex flex-col items-center justify-center min-h-screen relative z-10">
-        <div class="error-card animate-fade-in text-center">
-            <h1 class="text-7xl md:text-8xl font-extrabold text-[#c1003b] mb-2 drop-shadow-lg">404</h1>
-            <p class="text-2xl md:text-3xl font-bold mb-3">Không tìm thấy trang</p>
-            <p class="text-base md:text-lg text-gray-600 mb-6">Trang bạn tìm kiếm không tồn tại hoặc đã bị di chuyển.<br>Đừng lo, bạn sẽ được đưa về <span class="text-[#c1003b] font-bold">trang chủ</span> sau <span id="countdown" class="text-[#c1003b] font-bold">3</span> giây...</p>
-            <a href="/" class="btn-primary mt-2"><i class="fas fa-home mr-2"></i>Về Trang Chủ Ngay!</a>
-        </div>
-    </main>
-    <footer class="footer">
-        &copy; khetnews@gmail.com . liên hệ : 0899864943 . Text2 bảo hộ bản quyền . liên hệ mail.text2.click
-        <div class="flex justify-center space-x-4 mt-2">
-            <a href="#"><i class="fab fa-facebook-f text-xl"></i></a>
-            <a href="#"><i class="fab fa-twitter text-xl"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in text-xl"></i></a>
-            <a href="#"><i class="fab fa-instagram text-xl"></i></a>
-        </div>
-    </footer>
-    <script>
-        // Đếm ngược và chuyển hướng
-        const countdownElement = document.getElementById('countdown');
-        let timeLeft = 3;
-        function updateCountdown() {
-            countdownElement.textContent = timeLeft;
-            timeLeft--;
-            if (timeLeft < 0) {
-                clearInterval(countdownInterval);
-                window.location.href = '/';
-            }
-        }
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
+
+  <!-- ⚠️ Thay ảnh GitHub và link tại đây -->
+  <a href="https://khetentertainment.com/" target="_blank" class="fullscreen-link">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjN_7XcxB5dE6LJA1VB60PvkY2Ceq73Vhd7nQYTXZzTcQwjfak7a3Q-94oxDE9HS6ZXSMwFQ87Lkj2LDeguRVvNxjsEQsuxSis5LFDOVp4sznmbK83rY5z0BKg8en1tMMjAdH4gp5nDJ1h7YKB3Feho8Wkpx-X7DisPEoGetNoKBrLxStnSVwvPsobQqFo/s16000/405%20khet.gif" alt="Ảnh GitHub toàn màn hình">
+  </a>
+
 </body>
 </html>
