@@ -32,6 +32,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <style>
         /* Custom CSS for finer control and overrides */
         body {
@@ -250,13 +252,16 @@
 
         /* Blog post card styles */
         .blog-post-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            border-radius: 2rem !important;
+            box-shadow: 0 8px 32px 0 rgba(193,0,59,0.10), 0 1.5px 6px 0 rgba(255,224,178,0.10);
         }
 
         .blog-post-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(1.06) rotate(-1deg);
+            box-shadow: 0 16px 48px 0 rgba(193,0,59,0.18), 0 3px 12px 0 rgba(255,224,178,0.18);
+            z-index: 2;
         }
 
         .blog-post-card:active {
@@ -277,25 +282,39 @@
                 flex-direction: column;
                 justify-content: center;
                 text-align: center;
-                padding: 1rem;
+                padding: 1rem 0.2rem;
                 height: auto;
                 min-height: 100vh;
-                gap: 2rem;
+                gap: 1.2rem;
             }
             .hero-text-container {
                 max-width: 100%;
                 padding-right: 0;
                 margin-bottom: 0;
                 order: 2;
-                padding: 0 1rem;
+                padding: 0 0.2rem;
+            }
+            .hero-text-container h1 {
+                font-size: 1.2rem;
+                line-height: 1.2;
+                margin-bottom: 0.7rem;
+            }
+            .hero-text-container p {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 0.7rem;
+            }
+            .animated-gradient-text {
+                font-size: 1.1rem;
+                margin-top: 0.3rem;
             }
             .hero-image-container {
                 width: 100%;
-                height: 38vh;
+                height: 32vh;
                 align-items: center;
                 order: 1;
-                margin-top: 1.2rem;
-                margin-bottom: 0.5rem;
+                margin-top: 0.7rem;
+                margin-bottom: 0.2rem;
             }
             .hero-main-image {
                 max-height: 90%;
@@ -305,26 +324,6 @@
             .floating-icon {
                 display: none;
             }
-            /* Header mobile menu styles */
-            #mobile-menu {
-                display: flex;
-            }
-            /* Mobile hero text adjustments */
-            .hero-text-container h1 {
-                font-size: 1.1rem;
-                line-height: 1.2;
-                margin-bottom: 1rem;
-            }
-            .hero-text-container p {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                margin-bottom: 1rem;
-            }
-            .animated-gradient-text {
-                font-size: 1.1rem;
-                margin-top: 0.3rem;
-            }
-            /* Mobile CTA buttons */
             .hero-text-container .flex {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -335,27 +334,35 @@
                 max-width: 180px;
                 justify-content: center;
                 padding: 0.6rem 1rem;
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
             /* Blog section */
             #blog h2 {
                 font-size: 1.2rem;
             }
+            .blog-post-card {
+                padding: 1rem 0.5rem;
+                border-radius: 1.2rem !important;
+            }
             .blog-post-card h3 {
                 font-size: 1rem;
             }
             .blog-post-card p, .blog-post-card span {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
+            }
+            #blog-posts-container {
+                grid-template-columns: 1fr !important;
+                gap: 1.2rem !important;
             }
             /* Section header */
             .section-padding {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
+                padding-top: 1.2rem;
+                padding-bottom: 1.2rem;
             }
             /* Card & icon size */
             .stats-card, .col, .team-member, .contact {
-                min-height: 120px;
-                padding: 1rem;
+                min-height: 100px;
+                padding: 0.7rem;
             }
             .stats-card .text-2xl, .col .text-2xl, .col .text-3xl, .col .text-4xl, .team-member .text-2xl, .team-member .text-3xl, .team-member .text-4xl, .contact .text-2xl, .contact .text-3xl, .contact .text-4xl {
                 font-size: 1.1rem !important;
@@ -368,8 +375,20 @@
             }
             /* Team avatar size */
             .team-member .w-32, .team-member .h-32 {
-                width: 72px !important;
-                height: 72px !important;
+                width: 60px !important;
+                height: 60px !important;
+                border-radius: 50% !important;
+                box-shadow: 0 0 0 4px #f8bfc9, 0 8px 32px 0 rgba(193,0,59,0.10);
+                transition: box-shadow 0.3s, transform 0.3s;
+            }
+            .team-member:hover .w-32, .team-member:hover .h-32 {
+                box-shadow: 0 0 0 8px #ffe0b2, 0 16px 48px 0 rgba(193,0,59,0.18);
+                transform: scale(1.08) rotate(2deg);
+            }
+            /* Partner grid */
+            #partners .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.2rem !important;
             }
             /* Footer */
             footer {
@@ -379,11 +398,17 @@
             /* Contact form */
             #contact input, #contact textarea {
                 font-size: 0.95rem;
-                padding: 0.7rem 0.7rem 0.7rem 2.2rem;
+                padding: 0.7rem 0.7rem 0.7rem 1.2rem;
             }
             #contact button {
                 font-size: 1rem;
                 padding: 0.7rem 0;
+                border-radius: 1.2rem !important;
+                box-shadow: 0 2px 8px 0 rgba(193,0,59,0.10);
+            }
+            #contact button:hover {
+                transform: scale(1.04) translateY(-2px);
+                box-shadow: 0 6px 24px 0 rgba(193,0,59,0.18);
             }
             /* Icon size in header, nav, and buttons */
             .header-bottom .text-lg, .header-bottom .text-xl, .header-bottom .text-2xl, .header-bottom .text-3xl, .header-bottom .text-4xl,
@@ -394,38 +419,36 @@
         }
         @media (max-width: 480px) {
             .hero-content-area {
-                padding: 0.3rem;
-                gap: 1rem;
+                padding: 0.1rem;
+                gap: 0.7rem;
             }
             .hero-text-container {
-                padding: 0 0.2rem;
+                padding: 0 0.1rem;
             }
             .hero-text-container h1 {
-                font-size: 0.95rem;
-                margin-bottom: 0.7rem;
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
             }
             .hero-text-container p {
                 font-size: 0.85rem;
-                margin-bottom: 0.7rem;
+                margin-bottom: 0.5rem;
             }
             .animated-gradient-text {
                 font-size: 0.95rem;
             }
             .hero-image-container {
-                height: 28vh;
-                margin-top: 0.7rem;
-                margin-bottom: 0.2rem;
+                height: 22vh;
+                margin-top: 0.3rem;
+                margin-bottom: 0.1rem;
             }
             .hero-main-image {
-                max-width: 75%;
+                max-width: 70%;
             }
-            /* Smaller CTA buttons for very small screens */
             .hero-text-container .flex a {
-                max-width: 140px;
-                padding: 0.5rem 0.7rem;
+                max-width: 120px;
+                padding: 0.4rem 0.5rem;
                 font-size: 0.85rem;
             }
-            /* Blog section */
             #blog h2 {
                 font-size: 1rem;
             }
@@ -435,15 +458,13 @@
             .blog-post-card p, .blog-post-card span {
                 font-size: 0.8rem;
             }
-            /* Section header */
             .section-padding {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
+                padding-top: 0.7rem;
+                padding-bottom: 0.7rem;
             }
-            /* Card & icon size */
             .stats-card, .col, .team-member, .contact {
-                min-height: 90px;
-                padding: 0.7rem;
+                min-height: 70px;
+                padding: 0.4rem;
             }
             .stats-card .text-2xl, .col .text-2xl, .col .text-3xl, .col .text-4xl, .team-member .text-2xl, .team-member .text-3xl, .team-member .text-4xl, .contact .text-2xl, .contact .text-3xl, .contact .text-4xl {
                 font-size: 0.95rem !important;
@@ -454,26 +475,26 @@
             .col p, .team-member p {
                 font-size: 0.8rem;
             }
-            /* Team avatar size */
             .team-member .w-32, .team-member .h-32 {
-                width: 48px !important;
-                height: 48px !important;
+                width: 40px !important;
+                height: 40px !important;
             }
-            /* Footer */
+            #partners .grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.7rem !important;
+            }
             footer {
                 font-size: 0.75rem;
                 padding: 0.7rem 0;
             }
-            /* Contact form */
             #contact input, #contact textarea {
                 font-size: 0.85rem;
-                padding: 0.5rem 0.5rem 0.5rem 1.7rem;
+                padding: 0.4rem 0.4rem 0.4rem 0.7rem;
             }
             #contact button {
                 font-size: 0.9rem;
-                padding: 0.5rem 0;
+                padding: 0.4rem 0;
             }
-            /* Icon size in header, nav, and buttons */
             .header-bottom .text-lg, .header-bottom .text-xl, .header-bottom .text-2xl, .header-bottom .text-3xl, .header-bottom .text-4xl,
             nav .text-lg, nav .text-xl, nav .text-2xl, nav .text-3xl, nav .text-4xl,
             .hero-text-container i, .hero-image-container i, .blog-post-card i, .col i, .team-member i, .contact i {
@@ -564,6 +585,35 @@
                 max-width: 80px !important;
             }
         }
+        @media (max-width: 768px) {
+          .header-top {
+              display: none !important;
+          }
+          .header-bottom {
+              padding: 0.2rem 0.5rem !important;
+              border-radius: 1rem !important;
+              min-height: 44px !important;
+          }
+          #main-header .text-3xl {
+              display: none !important; /* Ẩn chữ Entertainment */
+          }
+          #header-logo {
+              height: 2rem !important;
+              max-width: 80px !important;
+          }
+          .header-bottom .flex.items-center.gap-1 {
+              gap: 0.5rem !important;
+          }
+          .header-bottom .text-lg, .header-bottom .text-xl, .header-bottom .text-2xl {
+              font-size: 1.3rem !important;
+          }
+          nav.flex-1.flex {
+              display: none !important;
+          }
+          #mobile-menu {
+              display: flex !important;
+          }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -598,19 +648,7 @@
     </script>
 </head>
 <body class="antialiased">
-
-    <div class="floating-particles">
-        <div class="particle" style="background:rgba(248,191,201,0.10);width:6px;height:6px;left:10%;animation-delay:0s;"></div>
-        <div class="particle" style="background:rgba(255,224,178,0.10);width:8px;height:8px;left:20%;animation-delay:2s;"></div>
-        <div class="particle" style="background:rgba(193,0,59,0.10);width:5px;height:5px;left:30%;animation-delay:4s;"></div>
-        <div class="particle" style="background:rgba(248,191,201,0.15);width:7px;height:7px;left:40%;animation-delay:6s;"></div>
-        <div class="particle" style="background:rgba(255,224,178,0.15);width:9px;height:9px;left:50%;animation-delay:8s;"></div>
-        <div class="particle" style="background:rgba(193,0,59,0.08);width:6px;height:6px;left:60%;animation-delay:10s;"></div>
-        <div class="particle" style="background:rgba(248,191,201,0.12);width:7px;height:7px;left:70%;animation-delay:12s;"></div>
-        <div class="particle" style="background:rgba(255,224,178,0.12);width:8px;height:8px;left:80%;animation-delay:14s;"></div>
-        <div class="particle" style="background:rgba(193,0,59,0.12);width:5px;height:5px;left:85%;animation-delay:16s;"></div>
-        <div class="particle" style="background:rgba(248,191,201,0.18);width:10px;height:10px;left:90%;animation-delay:18s;"></div>
-    </div>
+    <div id="particles-js" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;"></div>
 
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl shadow-lg transition-all duration-300 ease-in-out rounded-b-2xl border-b border-white/20">
         <div class="container mx-auto flex flex-col md:space-y-0 md:flex-col">
@@ -637,7 +675,11 @@
                 </div>
             </div>
             <div class="header-bottom flex flex-row items-center justify-between py-2 px-2 sm:px-4 md:px-8 lg:px-12 bg-white rounded-full shadow-md transition-all duration-300 gap-2 sm:gap-4 md:gap-8">
-                <nav class="flex-1 flex justify-center overflow-x-auto whitespace-nowrap gap-x-2 sm:gap-x-4 md:gap-x-8">
+                <!-- Hamburger menu button (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center px-2 py-2 text-[#c1003b] focus:outline-none">
+                  <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <nav class="flex-1 flex justify-center overflow-x-auto whitespace-nowrap gap-x-2 sm:gap-x-4 md:gap-x-8 hidden md:flex">
                     <a href="#about" class="text-gray-800 hover:text-red-600 font-semibold text-xs sm:text-sm md:text-base tracking-wide transition-colors duration-200 px-1 sm:px-2">Giới Thiệu</a>
                     <a href="#blog" class="text-gray-800 hover:text-red-600 font-semibold text-xs sm:text-sm md:text-base tracking-wide transition-colors duration-200 px-1 sm:px-2">BÀI ĐĂNG</a>
                     <a href="#ecosystem" class="text-gray-800 hover:text-red-600 font-semibold text-xs sm:text-sm md:text-base tracking-wide transition-colors duration-200 px-1 sm:px-2">CÁC KÊNH NỔI BẬT</a>
@@ -662,7 +704,22 @@
         </div>
     </header>
 
-    <section class="hero-section h-screen flex items-center justify-center text-white overflow-hidden pt-20">
+    <!-- Mobile menu overlay -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white z-50 flex flex-col items-center justify-start pt-20 transition-transform duration-300 transform translate-x-full md:hidden">
+      <button id="close-mobile-menu" class="absolute top-4 right-4 text-3xl text-[#c1003b]"><i class="fas fa-times"></i></button>
+      <nav class="flex flex-col gap-6 mt-8 w-full items-center">
+        <a href="#about" class="text-gray-800 font-bold text-lg">Giới Thiệu</a>
+        <a href="#blog" class="text-gray-800 font-bold text-lg">BÀI ĐĂNG</a>
+        <a href="#ecosystem" class="text-gray-800 font-bold text-lg">CÁC KÊNH NỔI BẬT</a>
+        <a href="#achievements" class="text-gray-800 font-bold text-lg">KẾ HOẠCH</a>
+        <a href="#partners" class="text-gray-800 font-bold text-lg">KÊNH</a>
+        <a href="#team" class="text-gray-800 font-bold text-lg">THÀNH VIÊN</a>
+        <a href="#contact" class="text-gray-800 font-bold text-lg">LIÊN HỆ</a>
+        <a href="https://www.facebook.com/khetentertainment" class="bg-[#c1003b] text-white px-6 py-2 rounded-lg font-semibold mt-4">Fanpage</a>
+        <a href="#signin" class="border-2 border-[#c1003b] text-[#c1003b] px-6 py-2 rounded-lg font-semibold mt-2">Đăng nhập</a>
+      </nav>
+    </div>
+    <section class="hero-section h-screen flex items-center justify-center text-white overflow-hidden pt-20 animate__animated animate__fadeInDown" data-aos="fade-down" data-aos-delay="100">
         <div class="container mx-auto max-w-7xl h-full hero-content-area">
             <div class="hero-text-container" data-aos="fade-right" data-aos-delay="200">
                 <p class="text-red-500 text-lg font-semibold mb-3 flex items-center animate-pulse">
@@ -676,7 +733,7 @@
                        class="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-lg shadow-md transition-all duration-300
                               bg-white text-[#c1003b] border-2 border-[#c1003b] hover:bg-[#c1003b] hover:text-white hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#c1003b]/20">
                         <i class="fas fa-rocket"></i>
-                        Khám phá ngay
+                        Khám phá
                     </a>
                     <a href="#contact"
                        class="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-lg shadow-lg transition-all duration-300
@@ -715,7 +772,7 @@
     </div>
 
     <!-- About Us Section (New section as per nav) -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-gray-50/50 to-white" id="about" data-aos="fade-up" data-aos-delay="100">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-gray-50/50 to-white animate__animated animate__fadeInUp" id="about" data-aos="fade-up" data-aos-delay="200">
         <div class="container mx-auto max-w-7xl">
             <!-- Section Header -->
             <div class="text-center mb-16" data-aos="fade-up">
@@ -856,7 +913,7 @@
     </section>
 
     <!-- Blog Posts Section -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm" id="blog">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="blog" data-aos="zoom-in" data-aos-delay="300">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12" data-aos="zoom-in">
                 Bài đăng <span class="text-red-600">mới nhất</span> từ Khet Entertainment
@@ -880,7 +937,7 @@
     </section>
 
     <!-- Ecosystem Section - Reverted to non-collapsible -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm" id="ecosystem">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="ecosystem" data-aos="fade-up" data-aos-delay="400">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 flex items-center justify-center gap-3" data-aos="zoom-in">
                 <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-layer-group"></i><span class="text-[#c1003b]"> Các kênh nổi bật</span>
@@ -918,7 +975,7 @@
     </section>
 
     <!-- Achievements Section - Reverted to non-collapsible -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-sm" id="achievements">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-sm animate__animated animate__fadeInUp" id="achievements" data-aos="fade-up" data-aos-delay="500">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 flex items-center justify-center gap-3" data-aos="zoom-in">
                 <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-rocket"></i>
@@ -986,7 +1043,7 @@
     </section>
 
     <!-- Partners Section - Reverted to non-collapsible -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm" id="partners">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" id="partners" data-aos="fade-up" data-aos-delay="600">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 flex items-center justify-center gap-3" data-aos="zoom-in">
                 <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><img src="" alt="logo" class="w-6 h-6 inline-block">
@@ -1257,7 +1314,7 @@
     </section>
 
     <!-- Team Section - Reverted to non-collapsible -->
-    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-sm" id="team">
+    <section class="section-padding px-4 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-sm animate__animated animate__fadeInUp" id="team" data-aos="fade-up" data-aos-delay="700">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-12 flex items-center justify-center gap-3" data-aos="zoom-in">
                 <span class="inline-block bg-[#c1003b]/10 text-[#c1003b] p-2 rounded-full"><i class="fas fa-users"></i> <span class="text-[#c1003b]">Team</span> Khet Entertainment
@@ -1368,7 +1425,7 @@
     </section>
 
     <!-- FormSubmit Contact Method (NEW) -->
-    <section id="contact" class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm">
+    <section id="contact" class="section-padding px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="800">
         <div class="container mx-auto max-w-2xl">
             <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-[#c1003b]/10 mb-8">
                 <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -1390,7 +1447,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm">
+    <footer class="bg-gray-900 text-gray-300 py-8 text-center text-sm animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="900">
         <div class="container mx-auto max-w-7xl px-4">
             <p>&copy; khetnews@gmail.com . liên hệ : 0899864943 . Text2 bảo hộ bản quyền . liên hệ mail.text2.click  </p>
             <div class="flex justify-center space-x-4 mt-4">
@@ -1482,5 +1539,77 @@
             }
         });
     </script>
+    <script>
+        // Hiệu ứng particles.js cho background động
+        particlesJS('particles-js', {
+          "particles": {
+            "number": {"value": 60, "density": {"enable": true, "value_area": 800}},
+            "color": {"value": ["#f8bfc9", "#ffe0b2", "#c1003b"]},
+            "shape": {"type": "circle"},
+            "opacity": {"value": 0.18, "random": true},
+            "size": {"value": 6, "random": true},
+            "line_linked": {"enable": false},
+            "move": {"enable": true, "speed": 1.2, "direction": "none", "random": true, "straight": false, "out_mode": "out"}
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": {"onhover": {"enable": true, "mode": "repulse"}, "onclick": {"enable": true, "mode": "push"}},
+            "modes": {"repulse": {"distance": 80, "duration": 0.4}, "push": {"particles_nb": 4}}
+          },
+          "retina_detect": true
+        });
+    </script>
+    <script>
+        // ... existing code ...
+        // JS cho menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('mobile-menu-btn');
+          var menu = document.getElementById('mobile-menu');
+          var closeBtn = document.getElementById('close-mobile-menu');
+          if (btn && menu && closeBtn) {
+            btn.onclick = function() {
+              menu.classList.remove('translate-x-full');
+            };
+            closeBtn.onclick = function() {
+              menu.classList.add('translate-x-full');
+            };
+          }
+        });
+        // ... existing code ...
+    </script>
+    <script>
+      window.onload = function() {
+        var btn = document.getElementById('mobile-menu-btn');
+        var menu = document.getElementById('mobile-menu');
+        var closeBtn = document.getElementById('close-mobile-menu');
+        if (btn && menu && closeBtn) {
+          btn.onclick = function() {
+            menu.classList.remove('translate-x-full');
+          };
+          closeBtn.onclick = function() {
+            menu.classList.add('translate-x-full');
+          };
+        }
+      };
+    </script>
+    <script>
+(function() {
+  function openMenu() {
+    var menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.remove('translate-x-full');
+  }
+  function closeMenu() {
+    var menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.add('translate-x-full');
+  }
+  window.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var closeBtn = document.getElementById('close-mobile-menu');
+    if (btn) btn.onclick = openMenu;
+    if (closeBtn) closeBtn.onclick = closeMenu;
+    closeMenu();
+  });
+})();
+</script>
 </body>
 </html>
