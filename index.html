@@ -537,6 +537,8 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            z-index: 9999 !important;
+            pointer-events: auto !important;
         }
         @media (min-width: 768px) {
             #main-header {
@@ -1751,30 +1753,30 @@
           var menu = document.getElementById('mobile-menu');
           var closeBtn = document.getElementById('close-mobile-menu');
           if (btn && menu && closeBtn) {
-            btn.onclick = function() {
+            btn.addEventListener('click', function() {
               menu.classList.remove('translate-x-full');
-            };
-            closeBtn.onclick = function() {
+            });
+            closeBtn.addEventListener('click', function() {
               menu.classList.add('translate-x-full');
-            };
+            });
           }
         });
         // ... existing code ...
     </script>
     <script>
-      window.onload = function() {
+      document.addEventListener('DOMContentLoaded', function() {
         var btn = document.getElementById('mobile-menu-btn');
         var menu = document.getElementById('mobile-menu');
         var closeBtn = document.getElementById('close-mobile-menu');
         if (btn && menu && closeBtn) {
-          btn.onclick = function() {
+          btn.addEventListener('click', function() {
             menu.classList.remove('translate-x-full');
-          };
-          closeBtn.onclick = function() {
+          });
+          closeBtn.addEventListener('click', function() {
             menu.classList.add('translate-x-full');
-          };
+          });
         }
-      };
+      });
     </script>
     <script>
 (function() {
